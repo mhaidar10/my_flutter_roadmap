@@ -1,3 +1,5 @@
+/* import 'dart:ffi'; */
+
 import 'package:expense_tracker_app/widgets/new_expense.dart';
 
 import './expenses_list/expenses_list.dart';
@@ -30,8 +32,14 @@ class _ExpensesState extends State<Expenses> {
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
       context: context,
-      builder: (ctx) => const NewExpense(),
+      builder: (ctx) => NewExpense(onAddExpense: _addExpense),
     );
+  }
+
+  void _addExpense(Expense expense) {
+    setState(() {
+      _registeredExpanses.add(expense);
+    });
   }
 
   @override
